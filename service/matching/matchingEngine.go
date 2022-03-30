@@ -273,6 +273,7 @@ func (e *matchingEngineImpl) AddWorkflowTask(
 		RunId:       addRequest.Execution.GetRunId(),
 		WorkflowId:  addRequest.Execution.GetWorkflowId(),
 		ScheduleId:  addRequest.GetScheduleId(),
+		Clock:       addRequest.GetClock(),
 		ExpiryTime:  expirationTime,
 		CreateTime:  now,
 	}
@@ -325,6 +326,7 @@ func (e *matchingEngineImpl) AddActivityTask(
 		RunId:       runID,
 		WorkflowId:  addRequest.Execution.GetWorkflowId(),
 		ScheduleId:  addRequest.GetScheduleId(),
+		Clock:       addRequest.GetClock(),
 		CreateTime:  now,
 		ExpiryTime:  expirationTime,
 	}

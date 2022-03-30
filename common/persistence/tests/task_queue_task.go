@@ -342,6 +342,7 @@ func (s *TaskQueueTaskSuite) randomTask(
 			WorkflowId:  uuid.New().String(),
 			RunId:       uuid.New().String(),
 			ScheduleId:  rand.Int63(),
+			Clock:       taskID,
 			CreateTime:  now,
 			ExpiryTime:  timestamp.TimePtr(now.Add(s.taskTTL)),
 		},
