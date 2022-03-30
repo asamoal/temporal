@@ -119,6 +119,7 @@ func (t *transferQueueTaskExecutorBase) pushActivity(
 			Kind: enumspb.TASK_QUEUE_KIND_NORMAL,
 		},
 		ScheduleId:             task.ScheduleID,
+		Clock:                  task.TaskID,
 		ScheduleToStartTimeout: activityScheduleToStartTimeout,
 	})
 
@@ -142,6 +143,7 @@ func (t *transferQueueTaskExecutorBase) pushWorkflowTask(
 		},
 		TaskQueue:              taskqueue,
 		ScheduleId:             task.ScheduleID,
+		Clock:                  task.TaskID,
 		ScheduleToStartTimeout: workflowTaskScheduleToStartTimeout,
 	})
 	return err

@@ -42,6 +42,7 @@ message TaskInfo {
     int64 schedule_id = 4;
     google.protobuf.Timestamp create_time = 5 [(gogoproto.stdtime) = true];
     google.protobuf.Timestamp expiry_time = 6 [(gogoproto.stdtime) = true];
+    int64 clock = 7;
 }
 
 // task_queue column

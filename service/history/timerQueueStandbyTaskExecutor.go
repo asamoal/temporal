@@ -33,6 +33,7 @@ import (
 	enumspb "go.temporal.io/api/enums/v1"
 	"go.temporal.io/api/serviceerror"
 	taskqueuepb "go.temporal.io/api/taskqueue/v1"
+
 	"go.temporal.io/server/api/adminservice/v1"
 	"go.temporal.io/server/api/matchingservice/v1"
 	"go.temporal.io/server/common"
@@ -595,6 +596,7 @@ func (t *timerQueueStandbyTaskExecutor) pushActivity(
 			Kind: enumspb.TASK_QUEUE_KIND_NORMAL,
 		},
 		ScheduleId:             activityTask.EventID,
+		Clock:                  activityTask.TaskID,
 		ScheduleToStartTimeout: activityScheduleToStartTimeout,
 	})
 	return err

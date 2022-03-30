@@ -470,6 +470,7 @@ func (t *timerQueueActiveTaskExecutor) executeActivityRetryTimerTask(
 		Execution:              &execution,
 		TaskQueue:              taskQueue,
 		ScheduleId:             task.EventID,
+		Clock:                  task.TaskID,
 		ScheduleToStartTimeout: timestamp.DurationPtr(scheduleToStartTimeout),
 	})
 
