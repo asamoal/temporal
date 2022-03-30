@@ -142,6 +142,7 @@ message RecordWorkflowTaskStartedRequest {
     // Unique id of each poll request. Used to ensure at most once delivery of tasks.
     string request_id = 5;
     temporal.api.workflowservice.v1.PollWorkflowTaskQueueRequest poll_request = 6;
+    int64 clock = 7;
 }
 
 message RecordWorkflowTaskStartedResponse {
@@ -169,6 +170,7 @@ message RecordActivityTaskStartedRequest {
     // Unique id of each poll request. Used to ensure at most once delivery of tasks.
     string request_id = 5;
     temporal.api.workflowservice.v1.PollActivityTaskQueueRequest poll_request = 6;
+    int64 clock = 7;
 }
 
 message RecordActivityTaskStartedResponse {

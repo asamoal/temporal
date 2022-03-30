@@ -1368,6 +1368,18 @@ func (e *historyEngineImpl) RecordActivityTaskStarted(
 	request *historyservice.RecordActivityTaskStartedRequest,
 ) (*historyservice.RecordActivityTaskStartedResponse, error) {
 
+	currentClock, err := e.shard.GenerateTaskID()
+	if err != nil {
+		return nil, err
+	}
+	if request.GetClock() >= currentClock {
+		e.shard.Unload()
+		return nil, &persistence.ShardOwnershipLostError{
+			ShardID: e.shard.GetShardID(),
+			Msg:     "stale shard",
+		}
+	}
+
 	namespaceEntry, err := e.getActiveNamespaceEntry(namespace.ID(request.GetNamespaceId()))
 	if err != nil {
 		return nil, err
@@ -1487,6 +1499,17 @@ func (e *historyEngineImpl) RecordWorkflowTaskStarted(
 	ctx context.Context,
 	request *historyservice.RecordWorkflowTaskStartedRequest,
 ) (*historyservice.RecordWorkflowTaskStartedResponse, error) {
+	currentClock, err := e.shard.GenerateTaskID()
+	if err != nil {
+		return nil, err
+	}
+	if request.GetClock() >= currentClock {
+		e.shard.Unload()
+		return nil, &persistence.ShardOwnershipLostError{
+			ShardID: e.shard.GetShardID(),
+			Msg:     "stale shard",
+		}
+	}
 	return e.workflowTaskHandler.handleWorkflowTaskStarted(ctx, request)
 }
 
